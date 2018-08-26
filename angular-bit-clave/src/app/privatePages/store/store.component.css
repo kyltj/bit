@@ -1,0 +1,14 @@
+.tags-container {
+    border: 1px solid #ccc !important;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .btn-cross {
+    padding-left: 10px;
+    vertical-align: top;
+  }
+  
+  .btn-padding {
+    margin-bottom: 10px;
+  }

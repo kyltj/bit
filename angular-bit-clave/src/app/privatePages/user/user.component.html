@@ -1,0 +1,83 @@
+<div class="container" *ngIf="userForm">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="text" class="form-control" formControlName="email">
+            <div *ngIf="checkError('email' ,'required')" class="alert alert-danger">
+                Обязательное поле.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" type="text" class="form-control" formControlName="phone">
+            <div *ngIf="checkError('phone' ,'required')" class="alert alert-danger">
+                Обязательное поле.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="interest">Interest</label>
+            <br>
+
+
+            <button *ngFor="let interest of interestsMas" (click)="addInterest(interest)" class="btn btn-primary btn-padding">{{ interest }}</button>
+        </div>
+        <div class="tags-container container">
+            <ng-container *ngFor="let interest of interestsMas">
+                <div *ngIf="isShowInterest(interest)" (click)="delInterest(interest)" class="btn btn-success btn-padding">{{ interest }}
+                    <span class="btn-cross">X</span>
+                </div>
+            </ng-container>
+        </div>
+
+    
+
+        <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" class="form-control" formControlName="country" [(ngModel)]="currentUser.country">
+                <option value="no">нет</option>
+                <option value="Ukraine">Ukraine</option>
+            </select>
+            <div *ngIf="checkError('country' ,'required')" class="alert alert-danger">
+                Обязательное поле.
+            </div>
+        </div>
+        <div class="form-group" *ngIf="isShowCity()">
+            <label for="city">City</label>
+            <select id="city" class="form-control" formControlName="city" [(ngModel)]="currentUser.city">
+                <option value="no">нет</option>
+                <option value="Kiev">Kiev</option>
+            </select>
+            <div *ngIf="checkError('city' ,'required')" class="alert alert-danger">
+                Обязательное поле.
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="isShowRegions()">
+                <label for="places">Places</label>
+                <br>
+    
+    
+                <button *ngFor="let place of placesMas" (click)="addPlace(place)" class="btn btn-primary btn-padding">{{ place }}</button>
+            </div>
+            <div class="tags-container container" *ngIf="isShowRegions()">
+                <ng-container *ngFor="let place of placesMas">
+                    <div *ngIf="isShowPlace(place)" (click)="delPlace(place)" class="btn btn-success btn-padding">{{ place }}
+                        <span class="btn-cross">X</span>
+                    </div>
+                </ng-container>
+            </div>
+        <div class="form-group">
+            <label for="sex">Sex</label>
+            <input id="sex" type="text" class="form-control" formControlName="sex">
+
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input id="age" type="text" class="form-control" formControlName="age">
+
+        </div>
+        <input type="submit" class="btn btn-primary" value="Save" [disabled]="userForm.invalid" />
+    </form>
+</div>
